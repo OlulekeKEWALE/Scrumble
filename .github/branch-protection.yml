@@ -1,0 +1,9 @@
+# .github/branch-protection.yml (conceptual)
+main:
+  requires_approval: true
+  required_approvals: 1
+  requires_status_checks: true
+  required_status_checks:
+    - Build and Test
+    # Formatting and dependency audit run inside Build and Test.
+    # Add other required checks only when those checks actually exist.

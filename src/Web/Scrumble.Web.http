@@ -1,0 +1,6 @@
+@Scrumble.Web_HostAddress = http://localhost:5166
+
+GET {{Scrumble.Web_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###

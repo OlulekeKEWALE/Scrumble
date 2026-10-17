@@ -1,0 +1,57 @@
+# =============================================================================
+# Scrumble .gitignore
+# =============================================================================
+
+# .NET Build, Package, and Test Artifacts
+[Bb]in/
+[Oo]bj/
+[Tt]est[Rr]esults/
+*.nupkg
+*.snupkg
+*.suo
+*.user
+*.userosscache
+*.sln.docstates
+
+# IDE & Editor Configurations
+.vs/
+.idea/
+.vscode/
+*.swp
+*~
+
+# Environment Variables and Local Secrets
+.env
+.env.*
+!.env.example
+*.pfx
+*.p12
+*.pem
+*.key
+appsettings.*.local.json
+
+# Operating System Metadata
+[Tt]humbs.db
+[Dd]esktop.ini
+.DS_Store
+
+# AI Assistant, Agent Directories, and Instruction Files (Excluded at any depth)
+**/.claude/
+**/.codex/
+**/.cursor/
+**/.gemini/
+**/.aider/
+**/.agent/
+**/.agents/
+**/.continue/
+**/.windsurf/
+**/.roo/
+**/.opencode/
+**/.antigravity/
+**/ai-agents/
+**/agent-workspace/
+**/AGENTS.md
+**/CLAUDE.md
+**/GEMINI.md
+**/.cursorrules
+**/.github/copilot-instructions.md

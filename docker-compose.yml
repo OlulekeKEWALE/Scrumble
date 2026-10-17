@@ -1,0 +1,25 @@
+# docker-compose.yml
+services:
+  sqlserver:
+    image: mcr.microsoft.com/mssql/server:2022-latest
+    environment:
+      ACCEPT_EULA: "Y"
+      MSSQL_SA_PASSWORD: "${SCRUMBLE_SQL_PASSWORD:?Set SQL password}"
+    ports:
+      - "127.0.0.1:1433:1433"
+    volumes:
+      - sql_data:/var/opt/mssql
+  redis:
+    image: redis:7-alpine
+    ports:
+      - "127.0.0.1:6379:6379"
+  rabbitmq:
+    image: rabbitmq:4-management-alpine
+    ports:
+      - "127.0.0.1:5672:5672"
+      - "127.0.0.1:15672:15672"
+    environment:
+      RABBITMQ_DEFAULT_USER: scrumble
+      RABBITMQ_DEFAULT_PASS: "${SCRUMBLE_RABBITMQ_PASSWORD:?Set RabbitMQ password}"
+volumes:
+  sql_data:

@@ -1,0 +1,9 @@
+#!/bin/sh
+# tools/git-hooks/commit-msg
+# Check commit message format (Listing 1.18)
+COMMIT_MSG_FILE=$1
+COMMIT_MSG=$(cat "$COMMIT_MSG_FILE")
+if ! echo "$COMMIT_MSG" | grep -qE "^(feat|fix|docs|style|refactor|perf|test|chore)(\([a-z]+\))?: .{1,50}"; then
+    echo "ERROR: Commit message must follow conventional commits format."
+    exit 1
+fi

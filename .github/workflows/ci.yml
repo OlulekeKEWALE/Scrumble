@@ -1,0 +1,44 @@
+# .github/workflows/ci.yml
+name: CI Build and Test
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  build:
+    name: Build and Test
+    runs-on: ubuntu-latest
+        
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+              
+      - name: Setup .NET
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: '10.0.x'
+                
+      - name: Restore dependencies
+        run: >-
+          dotnet restore -p:NuGetAudit=true -p:NuGetAuditMode=all
+          -p:WarningsAsErrors="NU1901;NU1902;NU1903;NU1904;NU1900;NU1905"
+              
+      - name: Build
+        run: dotnet build --no-restore --configuration Release
+              
+      - name: Run Unit Tests
+        run: |
+          dotnet test tests/Domain.Tests --no-build --configuration Release
+          dotnet test tests/Application.Tests --no-build --configuration Release
+              
+      - name: Run Integration Tests
+        run: dotnet test tests/Integration.Tests --no-build --configuration Release
+              
+      - name: Lint
+        run: dotnet format --verify-no-changes
+              
+      - name: Dependency vulnerability report
+        run: dotnet package list --vulnerable --include-transitive --no-restore
